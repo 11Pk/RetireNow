@@ -4,7 +4,8 @@ import Story from "./components/Story";
 import Health from "./components/Health";
 // import Community from "./components/Community";
 // import Home from "./components/Home";
-
+import LandingPage from './sections/LandingPage'
+import Posts from './sections/posts.jsx'
 function App() {
   return (
     <Router>
