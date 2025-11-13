@@ -3,9 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import storyRoutes from './ROUTES/storyRoutes.js'
 import healthRoutes from './ROUTES/healthRoutes.js'
-
+import connectDb from "./config/db.js";
 dotenv.config(); 
-
+connectDb();
 const app = express();
 
 // Middleware
