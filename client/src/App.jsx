@@ -1,22 +1,35 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import MicroJobs from "./components/Microjobs";
 import Story from "./components/Story";
-import Health from "./components/Health";
-// import Community from "./components/Community";
-// import Home from "./components/Home";
-import LandingPage from './sections/LandingPage'
-import Posts from './sections/posts.jsx'
+import Posts from "./components/posts";
+
 function App() {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/");  
+  };
+
   return (
-    <Router>
-      
-      <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/story" element={<Story />} />
-        <Route path="/health" element={<Health />} />
-        {/* <Route path="/community" element={<Community />} /> */}
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route 
+        path="/login" 
+        element={
+          <Login 
+            onNavigate={navigate}
+            onLogin={handleLogin}
+          />
+        } 
+      />
+      <Route path="/microjobs" element={<MicroJobs />} />
+      <Route path="/story" element={<Story />} />
+      <Route path="/posts" element={<Posts />} />
+    </Routes>
   );
 }
 

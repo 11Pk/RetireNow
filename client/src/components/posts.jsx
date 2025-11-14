@@ -106,11 +106,11 @@ function Posts() {
               </div>
 
               {/* Posts */}
-              <div className="space-y-4">
+              
                 {/* Ramesh's Post */}
                 <div className="border border-gray-200 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-full bg-blue-200 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-blue-200 flex items-center justify-center  ">
                       <span className="text-blue-700 font-semibold">R</span>
                     </div>
                     <div className="flex-1">
@@ -191,7 +191,7 @@ function Posts() {
                     </div>
                   </div>
                 </div>
-              </div>
+              
             </div>
           </div>
 
@@ -202,7 +202,7 @@ function Posts() {
               <h2 className="text-lg font-bold text-gray-900 mb-4">People Near You</h2>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 rounded-full bg-green-200 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-green-200 flex items-center justify-center">
                     <span className="text-green-700 font-semibold">N</span>
                   </div>
                   <div className="flex-1">

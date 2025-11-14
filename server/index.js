@@ -1,29 +1,47 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import storyRoutes from './ROUTES/storyRoutes.js'
-import healthRoutes from './ROUTES/healthRoutes.js'
-import "./utils/reminderScheduler.js";
+import jobRoutes from "./routes/jobRoutes.js";
 
-dotenv.config(); 
+// app.use("/api/jobs", jobRoutes);
+
+
+// Load environment variables
+dotenv.config();
+
+// Database
+import connectDB from "./config/db.js";
+
+// Routes
+import storyRoutes from "./routes/storyRoutes.js";
+import healthRoutes from "./routes/healthRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+
+// CRON / Utilities
+import "./utils/reminderScheduler.js";
 
 const app = express();
 
-// Middleware
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Sample route
+// Connect DB
+connectDB();
+
+// Test Route
 app.get("/", (req, res) => {
   res.send("Backend is running smoothly!");
 });
 
-app.use('/api/story',storyRoutes)
-app.use('/api/health',healthRoutes)
+// API Routes
+app.use("/api/story", storyRoutes);
+app.use("/api/health", healthRoutes);
+app.use("/api/auth", authRoutes);
 
-
+// Port
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(` Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
