@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import jobRoutes from "./routes/jobRoutes.js";
+
+// app.use("/api/jobs", jobRoutes);
+
 
 // Load environment variables
 dotenv.config();
