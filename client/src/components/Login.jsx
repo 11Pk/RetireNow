@@ -21,11 +21,25 @@ const Login = ({ onNavigate, onLogin }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      onLogin();
-    }
-  };
+const handleSubmit = async () => {
+  if (!validateForm()) return;
+
+  const response = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+
+  const data = await response.json();
+
+  if (data.token) {
+    localStorage.setItem("token", data.token);
+    onLogin();   // navigate to dashboard
+  } else {
+    alert(data.message);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center px-4 py-12">
@@ -60,7 +74,7 @@ const Login = ({ onNavigate, onLogin }) => {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="w-full px-4 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-purple-500 focus:outline-none transition"
                 placeholder="Enter your password"
-              />
+              />  
               {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
             </div>
 

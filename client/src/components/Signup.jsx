@@ -30,11 +30,23 @@ const Signup = ({ onNavigate, onSignup }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      onSignup();
-    }
-  };
+const handleSubmit = async () => {
+  if (!validateForm()) return;
+
+  const response = await fetch("http://localhost:5000/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+
+  const data = await response.json();
+  alert(data.message);
+
+  if (data.message === "Signup successful") {
+    onNavigate("login");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center px-4 py-12">
