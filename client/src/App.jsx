@@ -2,9 +2,10 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import MicroJobs from "./components/Microjobs";
 import Story from "./components/Story";
 import Posts from "./components/posts";
+import MicroJobs from "./components/Microjobs";
+import Health from "./components/Health";
 
 function App() {
   const navigate = useNavigate();
@@ -25,8 +26,10 @@ function App() {
         } 
       />
       <Route path="/story" element={<Story />} />
-      <Route path="/posts" element={<Posts />} />
-      <Route path = "/microjobs" element = {<MicroJobs/>} />
+      <Route path="/community" element={<Posts />} />
+      <Route path="/microjobs" element={<MicroJobs/>} />
+      <Route path="/health" element={<Health/>} />
+
     </Routes>
   );
 }

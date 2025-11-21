@@ -6,7 +6,7 @@ const post =new Post(
     {
     user: userId,
     content,
-    interest:interestTag,
+    interest,
     images}
 );
 return post.save();

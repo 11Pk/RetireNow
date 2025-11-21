@@ -88,7 +88,7 @@ const LandingPage = () => {
       </div>
 
       {/* Features Section */}
-      <div id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/* <div id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 text-gray-900">
           Everything You Need in One Place
         </h2>
@@ -109,7 +109,34 @@ const LandingPage = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
+  
+
+<div id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 text-gray-900">
+    Everything You Need in One Place
+  </h2>
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {[
+      { icon: Briefcase, title: 'Micro Jobs', desc: 'Find flexible, meaningful work opportunities that fit your schedule and interests', color: 'from-blue-500 to-blue-600', link: '/microjobs' },
+      { icon: User, title: 'Your Story', desc: 'Create and share your autobiography with family and future generations', color: 'from-purple-500 to-purple-600', link: '/story' },
+      { icon: Heart, title: 'Health Hub', desc: 'Track wellness, access health resources, and maintain your vitality', color: 'from-pink-500 to-pink-600', link: '/health' },
+      { icon: Users, title: 'Community', desc: 'Connect with like-minded individuals and build lasting friendships', color: 'from-green-500 to-green-600', link: '/community' },
+      { icon: MapPin, title: 'Local Services', desc: 'Discover nearby services, events, and volunteer opportunities', color: 'from-orange-500 to-orange-600', link: '/services' }
+    ].map((feature, idx) => (
+      <Link to={feature.link} key={idx}>
+        <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer">
+          <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6`}>
+            <feature.icon className="text-white" size={32} />
+          </div>
+          <h3 className="text-2xl font-bold mb-4 text-gray-900">{feature.title}</h3>
+          <p className="text-lg text-gray-600 leading-relaxed">{feature.desc}</p>
+        </div>
+      </Link>
+    ))}
+  </div>
+</div>
+
 
       {/* CTA Section */}
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 py-16 mt-16">
