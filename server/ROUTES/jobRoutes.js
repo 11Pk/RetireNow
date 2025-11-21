@@ -1,11 +1,9 @@
 import express from "express";
-// import { addJob, getJobs, updateJob, recommendJobs } from "../controllers/jobController.js";
+import { searchMicroJobs } from "../controllers/jobApiController.js";
+import jobRoutes from "./routes/jobRoutes.js";
 
 const router = express.Router();
-
-// router.post("/add", addJob);
-// router.get("/", getJobs);
-// router.put("/:id", updateJob);
-// router.get("/recommend/:userId", recommendJobs);
+app.use("/api/jobs", jobRoutes);
+router.get("/search", searchMicroJobs);
 
 export default router;

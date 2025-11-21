@@ -24,9 +24,9 @@ function App() {
           />
         } 
       />
-      {/* <Route path="/microjobs" element={<MicroJobs />} /> */}
       <Route path="/story" element={<Story />} />
       <Route path="/posts" element={<Posts />} />
+      <Route path = "/microjobs" element = {<MicroJobs/>} />
     </Routes>
   );
 }

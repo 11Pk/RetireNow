@@ -12,35 +12,16 @@ import {
 
 const MicroJobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterOpen, setFilterOpen] = useState(false);
-  const [savedJobs, setSavedJobs] = useState([]);
-  const [jobs, setJobs] = useState([]);
 
-  // ================================
-  // FETCH JOBS FROM BACKEND
-  // ================================
-  useEffect(() => {
-    fetch("http://localhost:5000/api/jobs")
-      .then((res) => res.json())
-      .then((data) => setJobs(data))
-      .catch((err) => console.log("Error fetching jobs:", err));
-  }, []);
+ 
+useEffect(() => {
+  if (searchTerm.trim() === "") return;
 
-  // Save / Unsave a job
-  const toggleSave = (jobId) => {
-    setSavedJobs((prev) =>
-      prev.includes(jobId)
-        ? prev.filter((id) => id !== jobId)
-        : [...prev, jobId]
-    );
-  };
-
-  // Search filter
-  const filteredJobs = jobs.filter(
-    (job) =>
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.location.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  fetch(`http://localhost:5000/api/jobs/search?profession=${searchTerm}`)
+    .then(res => res.json())
+    .then(data => setJobs(data))
+    .catch(err => console.log("Error fetching jobs:", err));
+}, [searchTerm]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
