@@ -45,7 +45,7 @@ const handleSubmit = async () => {
   alert(data.message);
 
   if (data.message === "Signup successful") {
-    navigate("login");
+    navigate("/");
   }
 };
 
@@ -122,14 +122,14 @@ const handleSubmit = async () => {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Already have an account?{' '}
-              <button onClick={() => navigate('login')} className="text-purple-600 font-semibold hover:text-purple-700">
+              <button onClick={() => navigate('/login')} className="text-purple-600 font-semibold hover:text-purple-700">
                 Sign In
               </button>
             </p>
           </div>
         </div>
 
-        <button onClick={() => navigate('landing')} className="mt-6 w-full py-3 text-gray-600 hover:text-gray-900 font-semibold">
+        <button onClick={() => navigate('/')} className="mt-6 w-full py-3 text-gray-600 hover:text-gray-900 font-semibold">
           ← Back to Home
         </button>
       </div>

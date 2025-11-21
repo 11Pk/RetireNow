@@ -4,7 +4,7 @@ import { User, Briefcase, Heart, Users, MapPin, Menu, X,  } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Landing Page Component
-const LandingPage = ({ onNavigate }) => {
+const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
-
-const Login = ({ onNavigate, onLogin }) => {
+import { useNavigate } from 'react-router-dom';
+const Login = () => {
+  const navigate = useNavigate() ;
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
 
@@ -34,7 +35,7 @@ const handleSubmit = async () => {
 
   if (data.token) {
     localStorage.setItem("token", data.token);
-    onLogin();   // navigate to dashboard
+   navigate('/')   // navigate to dashboard
   } else {
     alert(data.message);
   }
@@ -97,14 +98,14 @@ const handleSubmit = async () => {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <button onClick={() => onNavigate('signup')} className="text-purple-600 font-semibold hover:text-purple-700">
+              <button onClick={() => navigate('/signup')} className="text-purple-600 font-semibold hover:text-purple-700">
                 Sign Up
               </button>
             </p>
           </div>
         </div>
 
-        <button onClick={() => onNavigate('landing')} className="mt-6 w-full py-3 text-gray-600 hover:text-gray-900 font-semibold">
+        <button onClick={() => navigate('/')} className="mt-6 w-full py-3 text-gray-600 hover:text-gray-900 font-semibold">
           ← Back to Home
         </button>
       </div>

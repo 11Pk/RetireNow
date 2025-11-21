@@ -21,8 +21,6 @@ function App() {
         path="/login" 
         element={
           <Login 
-            onNavigate={navigate}
-            onLogin={handleLogin}
           />
         } 
       />
