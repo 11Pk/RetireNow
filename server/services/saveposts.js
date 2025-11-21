@@ -1,5 +1,5 @@
-import Post from "../models/Post.js";
 
+import  Post  from "../MODELS/posts.js";
 async function savePosts(userId,content,interest,images=[])
 {
 const post =new Post(

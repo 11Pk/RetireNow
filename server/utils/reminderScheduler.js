@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import { Reminder } from "../models/healthModel.js";
+import { Reminder } from "../MODELS/healthModel.js";
 import { sendEmail } from "./sendEmail.js";
 import User from "../models/User.js";
 

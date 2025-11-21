@@ -1,5 +1,6 @@
-import Post from "../models/Post.js";
 
+
+import  Post  from "../MODELS/posts.js";
 async function fetchPosts(interest)
 {
 limit=10;
