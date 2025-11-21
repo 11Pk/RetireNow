@@ -13,10 +13,10 @@ dotenv.config();
 import connectDB from "./config/db.js";
 
 // Routes
-import storyRoutes from "./routes/storyRoutes.js";
-import healthRoutes from "./routes/healthRoutes.js";
-import authRoutes from "./routes/authRoutes.js";
-import postRoute from "./routes/postRoutes.js"
+import storyRoutes from "./ROUTES/storyRoutes.js";
+import healthRoutes from './ROUTES/healthRoutes.js'
+import authRoutes from "./ROUTES/authRoutes.js";
+import postRoute from "./ROUTES/postRoutes.js"
 //  Utilities
 import "./utils/reminderScheduler.js";
 
