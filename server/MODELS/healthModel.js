@@ -36,9 +36,7 @@ const reminderSchema = new mongoose.Schema({
   },
 });
 
-// SAFE MODEL EXPORTS – prevents OverwriteModelError
-export const Health =
-  mongoose.models.Health || mongoose.model("Health", healthSchema);
 
-export const Reminder =
-  mongoose.models.Reminder || mongoose.model("Reminder", reminderSchema);
+export const Health =mongoose.model("Health", healthSchema);
+
+export const Reminder = mongoose.model("Reminder", reminderSchema);

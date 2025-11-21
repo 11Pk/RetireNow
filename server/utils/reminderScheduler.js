@@ -4,6 +4,7 @@ import { sendEmail } from "./sendEmail.js";
 import User from "../models/User.js";
 
 
+
 // Run every day at 9 AM
 cron.schedule("0 9 * * *", async () => {
   try {
