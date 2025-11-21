@@ -5,5 +5,4 @@ const router = express.Router();
 
 router.get("/posts",currentposts);
 router.post("/new",newpost);
-
 export default router;

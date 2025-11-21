@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
-const Signup = ({ onNavigate, onSignup }) => {
+const Signup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,7 +35,7 @@ const Signup = ({ onNavigate, onSignup }) => {
 const handleSubmit = async () => {
   if (!validateForm()) return;
 
-  const response = await fetch("http://localhost:5000/api/signup", {
+  const response = await fetch("http://localhost:5000/api/auth/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
@@ -43,7 +45,7 @@ const handleSubmit = async () => {
   alert(data.message);
 
   if (data.message === "Signup successful") {
-    onNavigate("login");
+    navigate("login");
   }
 };
 
@@ -120,14 +122,14 @@ const handleSubmit = async () => {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Already have an account?{' '}
-              <button onClick={() => onNavigate('login')} className="text-purple-600 font-semibold hover:text-purple-700">
+              <button onClick={() => navigate('login')} className="text-purple-600 font-semibold hover:text-purple-700">
                 Sign In
               </button>
             </p>
           </div>
         </div>
 
-        <button onClick={() => onNavigate('landing')} className="mt-6 w-full py-3 text-gray-600 hover:text-gray-900 font-semibold">
+        <button onClick={() => navigate('landing')} className="mt-6 w-full py-3 text-gray-600 hover:text-gray-900 font-semibold">
           ← Back to Home
         </button>
       </div>
