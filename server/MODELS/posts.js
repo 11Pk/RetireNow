@@ -10,7 +10,7 @@ const CommentSchema = new mongoose.Schema({
 const PostSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: `${User}`, required: true },   //User linked
   content: { type: String, required: true },
-  interestTag: { type: String, index: true },      
+  interest: { type: String, index: true },      
   images: [String],                               
   likesCount: { type: Number, default: 0 },
   

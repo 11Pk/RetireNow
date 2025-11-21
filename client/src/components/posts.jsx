@@ -1,6 +1,52 @@
 import { Search, Bell, User, Heart, MessageCircle, Image as ImageIcon, Paperclip, MoreVertical, MapPin } from 'lucide-react';
-
+import { useState } from 'react';
+import { useEffect } from 'react';
 function Posts() {
+  const [postText, setPostText] = useState("");
+
+const handleCreatePost = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/api/community/new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userId: "67452fb4c4a35e82b9f270ea",   // Replace with actual user ID
+        content: postText,
+        interest: selectedInterest,          // Your selected interest
+        images: []                      // Later add file upload here
+      })
+    });
+
+    const data = await response.json();
+    console.log("Post saved:", data);
+    fetchPosts(selectedInterest);
+setPostText(""); 
+  } catch (err) {
+    console.error("Error creating post:", err);
+  }
+};
+
+const [selectedInterest, setSelectedInterest] = useState("Gardening");
+const [posts, setPosts] = useState([]);
+
+const fetchPosts = async (interest) => {
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/community/posts?interest=${interest}`
+    );
+    const data = await res.json();
+    setPosts(data);
+  } catch (err) {
+    console.log("Error fetching posts:", err);
+  }
+};
+
+useEffect(() => {
+  fetchPosts(selectedInterest);
+
+}, [selectedInterest]);
   return (
     <div >
       {/* Header */}
@@ -50,25 +96,25 @@ function Posts() {
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h2 className="text-lg font-bold text-gray-900 mb-4">My Interests</h2>
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 cursor-pointer" onClick={() => setSelectedInterest("Gardening")}>
                   <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                     <span className="text-green-600 text-lg">🌳</span>
                   </div>
                   <span className="text-gray-700">Gardening</span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 cursor-pointer" onClick={() => setSelectedInterest("Music")}>
                   <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <span className="text-blue-600 text-lg">🎵</span>
                   </div>
                   <span className="text-gray-700">Music</span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 cursor-pointer" onClick={() => setSelectedInterest("Reading")}>
                   <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
                     <span className="text-purple-600 text-lg">📚</span>
                   </div>
                   <span className="text-gray-700">Reading</span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 cursor-pointer" onClick={() => setSelectedInterest("Volunteering")}>
                   <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
                     <span className="text-red-600 text-lg">❤️</span>
                   </div>
@@ -95,20 +141,85 @@ function Posts() {
                     type="text"
                     placeholder="Post something..."
                     className="flex-1 outline-none text-gray-700"
+                    value={postText}
+  onChange={(e) => setPostText(e.target.value)}
                   />
-                  <button className="p-2 hover:bg-gray-100 rounded-lg">
+                  <button className="p-2 hover:bg-gray-100 rounded-lg"  >
                     <ImageIcon className="w-5 h-5 text-gray-600" />
                   </button>
                   <button className="p-2 hover:bg-gray-100 rounded-lg">
                     <Paperclip className="w-5 h-5 text-gray-600" />
                   </button>
+                  <button  
+  onClick={handleCreatePost}   // Add this
+  className="p-2 bg-blue-500 text-white rounded-lg"
+>
+  Post
+</button>
                 </div>
               </div>
+
+{/* Dynamic Posts */}
+{posts.length === 0 ? (
+  <p className="text-gray-600 text-sm">No posts found for {selectedInterest}.</p>
+) : (
+  posts.map((post) => (
+    <div key={post._id} className="border border-gray-200 rounded-lg p-4 mb-4">
+      
+      {/* Post Header */}
+      <div className="flex items-start gap-3 mb-3">
+        <div className="w-12 h-12 rounded-full bg-blue-200 flex items-center justify-center">
+          <span className="text-blue-700 font-semibold">
+            {post.user?.name ? post.user.name.charAt(0) : "U"}
+          </span>
+        </div>
+
+        <div className="flex-1">
+          <div className="flex items-center justify-between mb-1">
+            <div>
+              <h3 className="font-bold text-gray-900">
+                {post.user?.name || "Unknown User"}
+              </h3>
+              <p className="text-sm text-gray-500">
+                {new Date(post.createdAt).toLocaleString()}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Post Content */}
+      <p className="text-gray-800 mb-3 ml-14">{post.content}</p>
+
+      {/* Post Images */}
+      {post.images && post.images.length > 0 && (
+        <img
+          src={post.images[0]}
+          alt="post image"
+          className="ml-14 rounded-lg w-full max-w-md"
+        />
+      )}
+
+      {/* Buttons */}
+      <div className="flex items-center gap-4 ml-14 mt-3">
+        <button className="flex items-center gap-2 text-gray-600 hover:text-red-500">
+          <Heart className="w-5 h-5" />
+          <span className="text-sm">0</span>
+        </button>
+        <button className="flex items-center gap-2 text-gray-600 hover:text-blue-500">
+          <MessageCircle className="w-5 h-5" />
+          <span className="text-sm">0</span>
+        </button>
+      </div>
+
+    </div>
+  ))
+)}
 
               {/* Posts */}
               
                 {/* Ramesh's Post */}
-                <div className="border border-gray-200 rounded-lg p-4">
+                {/* <div className="border border-gray-200 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-12 h-12 rounded-full bg-blue-200 flex items-center justify-center  ">
                       <span className="text-blue-700 font-semibold">R</span>
@@ -134,10 +245,10 @@ function Posts() {
                       <span className="text-sm">3</span>
                     </button>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Sunita's Post */}
-                <div className="border border-gray-200 rounded-lg p-4">
+                {/* <div className="border border-gray-200 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-12 h-12 rounded-full bg-red-200 flex items-center justify-center flex-shrink-0">
                       <span className="text-red-700 font-semibold">S</span>
@@ -172,10 +283,10 @@ function Posts() {
                       <span className="text-sm">5</span>
                     </button>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Marst's Post */}
-                <div className="border border-gray-200 rounded-lg p-4">
+                {/* <div className="border border-gray-200 rounded-lg p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-12 h-12 rounded-full bg-purple-200 flex items-center justify-center flex-shrink-0">
                       <span className="text-purple-700 font-semibold">M</span>
@@ -190,7 +301,7 @@ function Posts() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               
             </div>
           </div>

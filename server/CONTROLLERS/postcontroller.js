@@ -1,4 +1,4 @@
-import fetchposts from '../services/fetchposts.js'
+import fetchPosts from '../services/fetchposts.js'
 import savePosts from '../services/saveposts.js'
 
 export const currentposts= async(req,res)=>{
@@ -6,7 +6,7 @@ export const currentposts= async(req,res)=>{
        const posts = await fetchPosts(req.query.interest);
     res.status(200).json(posts);
     }
-    catch{
+    catch(error){
        console.log("Error fetching posts from the current category");
        throw error; 
     }
@@ -15,14 +15,16 @@ export const currentposts= async(req,res)=>{
 
 export const newpost=async(req,res)=>{
     try{
-            const newPost = await savePosts(req.query.userId, req.query.content, req.query.interest, req.query.images);
+            const { userId, content, interest, images } = req.body; //re.body not req.query??
+           
+    const newPost = await savePosts(userId, content, interest, images || []);
 
     res.status(201).json({
       message: "Post created successfully",
       post: newPost
     });
     }
-    catch{
+    catch(error){
 console.log("Error in creating this post.");
 throw error;
     }
