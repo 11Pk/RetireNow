@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Heart,
   Search,
-  Filter,
   BookmarkPlus,
   Clock,
   DollarSign,
@@ -10,176 +9,129 @@ import {
   MapPin,
 } from "lucide-react";
 
+const mockJobs = [
+  {
+    id: 1,
+    title: "Online Homework Assistant",
+    employer: "EduCare",
+    description:
+      "Help school students with homework for a few hours a week.",
+    city: "Remote",
+    type: "Part-time",
+    pay: "₹400/hr",
+  },
+  {
+    id: 2,
+    title: "Community Garden Helper",
+    employer: "Green Society",
+    description:
+      "Guide local residents on gardening and plant care.",
+    city: "Nearby",
+    type: "Flexible",
+    pay: "₹350/hr",
+  },
+];
+
 const MicroJobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [savedJobs, setSavedJobs] = useState([]);
 
- 
-useEffect(() => {
-  if (searchTerm.trim() === "") return;
-
-  fetch(`http://localhost:5000/api/jobs/search?profession=${searchTerm}`)
-    .then(res => res.json())
-    .then(data => setJobs(data))
-    .catch(err => console.log("Error fetching jobs:", err));
-}, [searchTerm]);
+  const toggleSave = (id) => {
+    setSavedJobs((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      {/* Navigation */}
+      
+      {/* Navbar */}
       <nav className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                <Heart className="text-white" size={24} />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                RetireWell
-              </span>
+        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+              <Heart className="text-white" />
             </div>
-
-            <div className="flex items-center space-x-4">
-              <button className="text-gray-700 hover:text-purple-600 font-semibold text-lg">
-                Dashboard
-              </button>
-              <button
-                onClick={() => (window.location.href = "/")}
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-lg transition"
-              >
-                Logout
-              </button>
-            </div>
+            <span className="text-2xl font-bold text-purple-600">
+              RetireWell
+            </span>
           </div>
         </div>
       </nav>
 
-      {/* Body */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Find Your Perfect{" "}
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Micro Job
-            </span>
-          </h1>
-          <p className="text-xl text-gray-600">
-            Flexible opportunities that fit your lifestyle and interests
-          </p>
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+
+        {/* Heading */}
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          Microjobs for You
+        </h1>
+        <p className="text-gray-600 text-lg mb-8">
+          Light-burdened, skill-matched opportunities
+        </p>
+
+        {/* Search Bar */}
+        <div className="relative max-w-xl mb-10">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search by profession (teacher, gardener...)"
+            className="w-full pl-12 pr-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-purple-500"
+          />
         </div>
 
-        {/* Search Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                size={24}
-              />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search jobs or locations..."
-                className="w-full pl-14 pr-4 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-purple-500 focus:outline-none transition"
-              />
-            </div>
-
-            <button
-              onClick={() => setFilterOpen(!filterOpen)}
-              className="px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition flex items-center justify-center gap-2"
-            >
-              <Filter size={20} />
-              Filters
-            </button>
-          </div>
-        </div>
-
-        {/* JOB CARDS */}
+        {/* Job Cards */}
         <div className="grid md:grid-cols-2 gap-6">
-          {filteredJobs.map((job) => (
+          {mockJobs.map((job) => (
             <div
-              key={job._id}
-              className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1"
+              key={job.id}
+              className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition"
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-2xl font-semibold text-gray-900">
                     {job.title}
                   </h3>
-                  <p className="text-lg text-gray-600">{job.company}</p>
+                  <p className="text-gray-600">{job.employer}</p>
                 </div>
 
-                {/* Save Button */}
                 <button
-                  onClick={() => toggleSave(job._id)}
-                  className={`p-3 rounded-full transition ${
-                    savedJobs.includes(job._id)
+                  onClick={() => toggleSave(job.id)}
+                  className={`p-2 rounded-full ${
+                    savedJobs.includes(job.id)
                       ? "bg-purple-100 text-purple-600"
-                      : "bg-gray-100 text-gray-400 hover:bg-purple-50"
+                      : "bg-gray-100 text-gray-400"
                   }`}
                 >
-                  <BookmarkPlus size={24} />
+                  <BookmarkPlus />
                 </button>
               </div>
 
-              {/* Skills */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {job.skills?.map((skill, idx) => (
-                  <span
-                    key={idx}
-                    className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              {/* Description */}
-              <p className="text-gray-700 mb-4 leading-relaxed">
+              <p className="text-gray-700 mb-4">
                 {job.description}
               </p>
 
-              {/* Info Grid */}
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="flex items-center gap-2 text-gray-600">
-                  <MapPin size={20} className="text-purple-600" />
-                  <span className="text-lg">{job.location}</span>
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-600">
-                  <Clock size={20} className="text-purple-600" />
-                  <span className="text-lg">{job.hours}</span>
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-600">
-                  <DollarSign size={20} className="text-purple-600" />
-                  <span className="text-lg font-semibold text-green-600">
-                    {job.pay}
-                  </span>
-                </div>
-
+              <div className="grid grid-cols-2 gap-4 text-gray-600 mb-5">
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
-                    {job.type}
-                  </span>
+                  <MapPin size={18} /> {job.city}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock size={18} /> {job.type}
+                </div>
+                <div className="flex items-center gap-2">
+                  <DollarSign size={18} /> {job.pay}
                 </div>
               </div>
 
-              {/* Apply Button */}
-              <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold hover:shadow-lg transition flex items-center justify-center gap-2">
-                <CheckCircle size={20} />
+              <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold flex items-center justify-center gap-2">
+                <CheckCircle size={18} />
                 Apply Now
               </button>
             </div>
           ))}
         </div>
-
-        {filteredJobs.length === 0 && (
-          <p className="text-center text-gray-600 text-lg mt-10">
-            No jobs found. Try another search.
-          </p>
-        )}
       </div>
     </div>
   );
