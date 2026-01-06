@@ -35,7 +35,15 @@ const handleSubmit = async () => {
 
   if (data.token) {
     localStorage.setItem("token", data.token);
-   navigate('/')   // navigate to dashboard
+if (data.token) {
+  localStorage.setItem("token", data.token);
+  if (data.role === "job_provider") {
+    navigate("/provider-dashboard"); // age < 50
+  } else {
+    navigate("/"); // age ≥ 50
+  }
+}
+
   } else {
     alert(data.message);
   }

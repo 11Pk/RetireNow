@@ -1,61 +1,56 @@
-import Job from "../models/jobModel.js";
-import User from "../models/User.js";
+import Job from "../models/jobModels.js";
 
-// ADD JOB
-export const addJob = async (req, res) => {
+/**
+ * CREATE JOB (age < 50)
+ */
+export const createJob = async (req, res) => {
   try {
-    const job = new Job(req.body);
-    const saved = await job.save();
-    res.status(201).json(saved);
-  } catch (err) {
-    res.status(500).json({ message: "Could not add job", err });
+    const {
+      title,
+      description,
+      profession,
+      location,
+      peopleRequired,
+    } = req.body;
+
+    const job = await Job.create({
+      title,
+      description,
+      profession,
+      location,
+      peopleRequired,
+      postedBy: req.user._id, // 🔑 logged-in provider
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Job created successfully",
+      job,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to create job",
+    });
   }
 };
 
-// GET ALL JOBS
-export const getJobs = async (req, res) => {
+/**
+ * GET MY JOBS (provider dashboard)
+ */
+export const getMyJobs = async (req, res) => {
   try {
-    const jobs = await Job.find();
-    res.status(200).json(jobs);
-  } catch (err) {
-    res.status(500).json({ message: "Could not fetch jobs", err });
-  }
-};
+    const jobs = await Job.find({ postedBy: req.user._id })
+      .sort({ createdAt: -1 });
 
-// UPDATE JOB
-export const updateJob = async (req, res) => {
-  try {
-    const updated = await Job.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.status(200).json(updated);
-  } catch (err) {
-    res.status(500).json({ message: "Could not update job", err });
-  }
-};
-
-// RECOMMEND JOBS BASED ON USER INTERESTS
-export const recommendJobs = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.userId);
-
-    if (!user || !user.interests)
-      return res.status(400).json({ message: "User interests not found" });
-
-    const userInterests = user.interests.map(i => i.toLowerCase());
-
-    const jobs = await Job.find();
-
-    const recommended = jobs.filter((job) =>
-      job.skills.some(skill =>
-        userInterests.includes(skill.toLowerCase())
-      )
-    );
-
-    res.json(recommended);
-  } catch (err) {
-    res.status(500).json({ message: "Could not recommend jobs", err });
+    res.json({
+      success: true,
+      jobs,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch jobs",
+    });
   }
 };

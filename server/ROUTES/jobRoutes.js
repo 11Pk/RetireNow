@@ -1,11 +1,27 @@
 import express from "express";
-// import { addJob, getJobs, updateJob, recommendJobs } from "../controllers/jobController.js";
+import { createJob, getMyJobs } from "../controllers/jobController.js";
+import { protect, allowRoles } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// router.post("/add", addJob);
-// router.get("/", getJobs);
-// router.put("/:id", updateJob);
-// router.get("/recommend/:userId", recommendJobs);
+/**
+ * Provider submits job
+ */
+router.post(
+  "/",
+  protect,
+  allowRoles("job_provider"),
+  createJob
+);
+
+/**
+ * Provider views his jobs
+ */
+router.get(
+  "/my-jobs",
+  protect,
+  allowRoles("job_provider"),
+  getMyJobs
+);
 
 export default router;
