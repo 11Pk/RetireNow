@@ -15,9 +15,8 @@ export const currentposts= async(req,res)=>{
 
 export const newpost=async(req,res)=>{
     try{
-            const { userId, content, interest, images } = req.body; //re.body not req.query??
-           
-    const newPost = await savePosts(userId, content, interest, images || []);
+            const { userId, content, interest, images } = req.body; 
+               const newPost = await savePosts(userId, content, interest, images || []);
 
     res.status(201).json({
       message: "Post created successfully",
