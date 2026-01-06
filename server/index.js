@@ -1,12 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-// import jobRoutes from "./routes/jobRoutes.js";
-
-// app.use("/api/jobs", jobRoutes);
-
-
-
+import jobRoutes from "./routes/jobRoutes.js";
 dotenv.config();
 
 // Database
@@ -35,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 // API Routes
+app.use("/api/jobs", jobRoutes);
 app.use("/api/story", storyRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);

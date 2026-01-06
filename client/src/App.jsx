@@ -6,6 +6,8 @@ import Story from "./components/Story";
 import Posts from "./components/posts";
 import MicroJobs from "./components/Microjobs";
 import Health from "./components/Health";
+import ProviderJobForm from "./components/ProviderJobForm";
+import MyJobs from "./components/MyJobs";
 
 function App() {
   const navigate = useNavigate();
@@ -29,6 +31,8 @@ function App() {
       <Route path="/community" element={<Posts />} />
       <Route path="/microjobs" element={<MicroJobs/>} />
       <Route path="/health" element={<Health/>} />
+  <Route path="/provider-dashboard" element={<ProviderJobForm />} />
+      <Route path ='/my-jobs' element = {<MyJobs/>} />
 
     </Routes>
   );
