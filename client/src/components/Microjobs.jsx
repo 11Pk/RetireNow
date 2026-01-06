@@ -152,6 +152,20 @@ const MicroJobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [savedJobs, setSavedJobs] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [appliedJobs, setAppliedJobs] = useState([]);
+
+useEffect(() => {
+  fetch("http://localhost:5000/api/jobs/applied", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) =>
+      setAppliedJobs(data.applications.map((a) => a.job._id))
+    );
+}, []);
+
 
   useEffect(() => {
     fetch("http://localhost:5000/api/jobs", {
@@ -169,9 +183,22 @@ const MicroJobs = () => {
     );
   };
 
-  const applyJob = () => {
-    alert("You are hired for this job. Please wait until they contact you.");
-  };
+
+  const applyJob = async (jobId) => {
+  const res = await fetch(
+    `http://localhost:5000/api/jobs/apply/${jobId}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  const data = await res.json();
+  alert(data.message);
+};
+
 
   const filteredJobs = jobs.filter(
     (job) =>
@@ -257,13 +284,18 @@ const MicroJobs = () => {
                 </div>
               </div>
 
-              <button
-                onClick={() => applyJob(job._id)}
-                className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold flex items-center justify-center gap-2"
-              >
-                <CheckCircle size={18} />
-                Apply Now
-              </button>
+           <button
+  disabled={appliedJobs.includes(job._id)}
+  onClick={() => applyJob(job._id)}
+  className={`w-full py-3 rounded-xl font-semibold ${
+    appliedJobs.includes(job._id)
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-purple-600 text-white"
+  }`}
+>
+  {appliedJobs.includes(job._id) ? "Applied" : "Apply Now"}
+</button>
+
             </div>
           ))}
         </div>

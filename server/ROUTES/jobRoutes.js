@@ -1,7 +1,7 @@
 import express from "express";
-import { createJob, getMyJobs , getActiveJobs } from "../controllers/jobController.js";
+import { createJob, getMyJobs , getActiveJobs , getAppliedJobs } from "../controllers/jobController.js";
 import { protect, allowRoles } from "../middleware/authMiddleware.js";
-
+import { applyToJob } from "../controllers/jobController.js";
 const router = express.Router();
 
 /**
@@ -12,6 +12,13 @@ router.post(
   protect,
   allowRoles("job_provider"),
   createJob
+);
+
+router.post(
+  "/apply/:jobId",
+  protect,
+  allowRoles("retiree"),
+  applyToJob
 );
 
 router.get(
@@ -33,3 +40,11 @@ router.get(
 );
 
 export default router;
+
+router.get(
+  "/applied",
+  protect,
+  allowRoles("retiree"),
+  getAppliedJobs
+);
+

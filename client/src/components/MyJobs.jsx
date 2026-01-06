@@ -1,8 +1,8 @@
-// MyJobs.jsx
 import React, { useEffect, useState } from "react";
 
 const MyJobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [applications, setApplications] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/jobs/my-jobs", {
@@ -11,7 +11,10 @@ const MyJobs = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => setJobs(data.jobs));
+      .then((data) => {
+        setJobs(data.jobs);
+        setApplications(data.applications);
+      });
   }, []);
 
   return (
@@ -26,35 +29,44 @@ const MyJobs = () => {
             key={job._id}
             className="bg-white p-6 rounded-2xl shadow-lg"
           >
-            <h2 className="text-2xl font-semibold text-gray-900">
-              {job.title}
-            </h2>
+            <h2 className="text-2xl font-semibold">{job.title}</h2>
 
-            <p className="text-gray-600">
-              Profession: {job.profession}
-            </p>
-
-            <p className="text-gray-600">
-              Location: {job.location}
-            </p>
+            <p>Profession: {job.profession}</p>
+            <p>Location: {job.location}</p>
 
             <div className="mt-4 grid grid-cols-2 gap-4">
-              <p className="font-semibold">
-                People Required: {job.peopleRequired}
-              </p>
+              <p><b>People Required:</b> {job.peopleRequired}</p>
+              <p><b>People Hired:</b> {job.peopleHired}</p>
+            </div>
 
-              <p className="font-semibold">
-                People Hired: {job.peopleHired}
-              </p>
+            {/* Applicants Section */}
+            <div className="mt-6">
+              <h3 className="text-xl font-semibold mb-3">
+                Applied / Hired People
+              </h3>
+
+              {applications
+                .filter((app) => app.job === job._id)
+                .map((app) => (
+                  <div
+                    key={app._id}
+                    className="border p-4 rounded-lg mb-3"
+                  >
+                    <p><b>Name:</b> {app.applicant.name}</p>
+                    <p><b>Email:</b> {app.applicant.email}</p>
+                    <p><b>Phone:</b> {app.applicant.phone}</p>
+                    <p><b>Status:</b> {app.status}</p>
+                  </div>
+                ))}
+
+              {applications.filter((app) => app.job === job._id).length === 0 && (
+                <p className="text-gray-500">
+                  No one has applied yet.
+                </p>
+              )}
             </div>
           </div>
         ))}
-
-        {jobs.length === 0 && (
-          <p className="text-gray-600 text-lg">
-            You have not posted any jobs yet.
-          </p>
-        )}
       </div>
     </div>
   );
