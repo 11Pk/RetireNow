@@ -12,3 +12,4 @@ router.get("/getAllReminder", getAllReminders);
 
 
 export default router;
+
