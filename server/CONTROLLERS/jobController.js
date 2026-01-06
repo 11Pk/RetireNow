@@ -54,3 +54,21 @@ export const getMyJobs = async (req, res) => {
     });
   }
 };
+// GET ALL ACTIVE JOBS (for retirees)
+export const getActiveJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({ isActive: true })
+      .populate("postedBy", "name email phone") // 👈 WHO POSTED
+      .sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      jobs,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch jobs",
+    });
+  }
+};

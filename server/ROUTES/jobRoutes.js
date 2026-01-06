@@ -1,5 +1,5 @@
 import express from "express";
-import { createJob, getMyJobs } from "../controllers/jobController.js";
+import { createJob, getMyJobs , getActiveJobs } from "../controllers/jobController.js";
 import { protect, allowRoles } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -14,9 +14,17 @@ router.post(
   createJob
 );
 
+router.get(
+  "/",
+  protect,
+  allowRoles("retiree"),
+  getActiveJobs
+);
+
 /**
  * Provider views his jobs
  */
+
 router.get(
   "/my-jobs",
   protect,
