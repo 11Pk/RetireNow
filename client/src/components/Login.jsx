@@ -51,10 +51,10 @@ if (data.token) {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-[#F3F4F4] flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1D546D] rounded-full mb-4">
             <Heart className="text-white" size={32} />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome Back</h1>
@@ -92,12 +92,12 @@ if (data.token) {
                 <input type="checkbox" className="w-5 h-5 text-purple-600 border-gray-300 rounded" />
                 <span className="ml-2 text-gray-700">Remember me</span>
               </label>
-              <button className="text-purple-600 hover:text-purple-700 font-semibold">Forgot Password?</button>
+              <button className="text-[#1D546D] hover:text-purple-700 font-semibold">Forgot Password?</button>
             </div>
 
             <button
               onClick={handleSubmit}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition"
+              className="w-full py-4 bg-[#061E29] text-white rounded-xl text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition"
             >
               Sign In
             </button>
@@ -106,7 +106,7 @@ if (data.token) {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <button onClick={() => navigate('/signup')} className="text-purple-600 font-semibold hover:text-purple-700">
+              <button onClick={() => navigate('/signup')} className="text-[#1D546D] font-semibold hover:text-purple-700">
                 Sign Up
               </button>
             </p>

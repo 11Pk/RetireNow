@@ -8,6 +8,7 @@ import MicroJobs from "./components/Microjobs";
 import Health from "./components/Health";
 import ProviderJobForm from "./components/ProviderJobForm";
 import MyJobs from "./components/MyJobs";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const navigate = useNavigate();

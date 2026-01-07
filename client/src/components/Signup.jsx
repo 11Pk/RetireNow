@@ -176,10 +176,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen flex items-center justify-center bg-[#F3F4F4]">
       <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md">
         <div className="text-center mb-6">
-          <Heart className="mx-auto text-purple-600" size={40} />
+          <Heart className="mx-auto text-[#1D546D]" size={40} />
           <h2 className="text-3xl font-bold">Create Account</h2>
         </div>
 
@@ -200,7 +200,7 @@ const Signup = () => {
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-purple-600 text-white py-3 rounded-lg"
+          className="w-full bg-[#061E29] text-white py-3 rounded-lg"
         >
           Sign Up
         </button>
