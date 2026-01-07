@@ -18,6 +18,7 @@ export const signup = async (req, res) => {
       age,
       phone,
       role,
+    
     });
 
     res.json({ success: true, message: "Signup successful" });

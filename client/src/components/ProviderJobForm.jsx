@@ -31,8 +31,8 @@ const ProviderJobForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-10">
-      <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
+    <div className="min-h-screen bg-[#f9f6f2] p-10">
+      <div className="max-w-2xl mx-auto bg-[#F3F4F4] p-8 rounded-2xl shadow-xl">
         <h1 className="text-3xl font-bold mb-6 text-gray-900">
           Post a Microjob
         </h1>
@@ -64,7 +64,7 @@ const ProviderJobForm = () => {
 
           <input
             type="text"
-            placeholder="Location (City / Remote)"
+            placeholder="Location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className="w-full p-3 border rounded-lg"
@@ -78,20 +78,21 @@ const ProviderJobForm = () => {
             className="w-full p-3 border rounded-lg"
           />
         </div>
-
+        <div className="flex gap-28 ml-16">
         <button
           onClick={submitJob}
-          className="mt-6 w-full bg-purple-600 text-white py-3 rounded-lg font-semibold"
+          className="mt-6  w-32 bg-[#061E29] text-white py-3 rounded-lg font-semibold"
         >
           Submit Job
         </button>
 
         <button
           onClick={() => navigate("/my-jobs")}
-          className="mt-4 w-full border border-purple-600 text-purple-600 py-3 rounded-lg font-semibold"
+          className="mt-6 w-52  border border-[#061E29] h-12 text-[#061E29]  rounded-lg font-semibold"
         >
           View My Registered Jobs
         </button>
+        </div>
       </div>
     </div>
   );

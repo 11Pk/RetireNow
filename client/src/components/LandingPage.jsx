@@ -8,34 +8,40 @@ const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-[#F3F4F4]">
       {/* Navigation */}
       <nav className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12  bg-gradient-to-br 
+            from-[#061E29] 
+            via-[#1D546D] 
+            to-[#5F9598]  rounded-full flex items-center justify-center">
                 <Heart className="text-white" size={24} />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold  bg-gradient-to-br 
+            from-[#061E29] 
+            via-[#1D546D] 
+            to-[#5F9598]  bg-clip-text text-transparent">
                 RetireWell
               </span>
             </div>
             
             <div className="hidden md:flex space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-purple-600 text-lg font-medium transition">Features</a>
-              <a href="#about" className="text-gray-700 hover:text-purple-600 text-lg font-medium transition">About</a>
-              <a href="#contact" className="text-gray-700 hover:text-purple-600 text-lg font-medium transition">Contact</a>
+              <a href="#features" className="text-gray-700 hover:text-[#1D546D] text-lg font-medium transition">Features</a>
+              <a href="#about" className="text-gray-700 hover:text-[#1D546D] text-lg font-medium transition">About</a>
+              <a href="#contact" className="text-gray-700 hover:text-[#1D546D] text-lg font-medium transition">Contact</a>
             </div>
 
             <div className="hidden md:flex space-x-4">
               <Link to="/login">
-              <button  className="px-6 py-3 text-purple-600 border-2 border-purple-600 rounded-full font-semibold hover:bg-purple-50 transition text-lg">
+              <button  className="px-6 py-3 text-[#061E29] border-2 border-[#061E29] rounded-full font-semibold hover:bg-purple-50 transition text-lg">
                 Login
               </button>
               </Link>
               <Link to = "/signup">
-              <button className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-lg transition text-lg">
+              <button className="px-6 py-3 bg-[#061E29] text-white rounded-full font-semibold hover:shadow-lg transition text-lg">
                 Get Started
               </button>
               </Link>
@@ -72,7 +78,10 @@ const LandingPage = () => {
         <div className="text-center">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
             Your Next Chapter,
-            <span className="block bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="block  bg-gradient-to-br 
+            from-[#061E29] 
+            via-[#1D546D] 
+            to-[#5F9598]  bg-clip-text text-transparent">
               Your Best Chapter
             </span>
           </h1>
@@ -80,7 +89,7 @@ const LandingPage = () => {
             Stay active, connected, and fulfilled in retirement. Find flexible work, share your story, maintain your health, and build meaningful connections.
           </p>
           <Link to="/signup">
-          <button className="px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-xl font-semibold hover:shadow-2xl transform hover:scale-105 transition">
+          <button className="px-10 py-5 bg-[#061E29] text-white rounded-full text-xl font-semibold hover:shadow-2xl transform hover:scale-105 transition">
             Start Your Journey
           </button>
           </Link>
@@ -139,7 +148,10 @@ const LandingPage = () => {
 
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 py-16 mt-16">
+      <div className="bg-gradient-to-br 
+            from-[#061E29] 
+            via-[#1D546D] 
+            to-[#5F9598]  py-16 mt-16">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
             Ready to Begin Your New Adventure?
@@ -148,7 +160,7 @@ const LandingPage = () => {
             Join thousands of retirees who are living their best lives
           </p>
           <Link to="/signup">
-          <button  className="px-10 py-5 bg-white text-purple-600 rounded-full text-xl font-semibold hover:shadow-2xl transform hover:scale-105 transition">
+          <button  className="px-10 py-5 bg-white text-[#1D546D] rounded-full text-xl font-semibold hover:shadow-2xl transform hover:scale-105 transition">
             Create Free Account
           </button>
           </Link>
@@ -156,7 +168,7 @@ const LandingPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-[#061E29] text-white py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-lg">&copy; 2025 RetireWell. Empowering your retirement journey.</p>
         </div>

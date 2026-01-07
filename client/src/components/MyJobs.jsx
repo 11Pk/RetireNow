@@ -18,7 +18,7 @@ const MyJobs = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-10">
+    <div className="min-h-screen bg-[#fffffe] p-10">
       <h1 className="text-3xl font-bold mb-8 text-gray-900">
         My Registered Jobs
       </h1>
@@ -27,14 +27,14 @@ const MyJobs = () => {
         {jobs.map((job) => (
           <div
             key={job._id}
-            className="bg-white p-6 rounded-2xl shadow-lg"
+            className="bg-[#F3F4F4] p-6 rounded-2xl shadow-lg"
           >
             <h2 className="text-2xl font-semibold">{job.title}</h2>
 
             <p>Profession: {job.profession}</p>
             <p>Location: {job.location}</p>
 
-            <div className="mt-4 grid grid-cols-2 gap-4">
+            <div className="mt-4 ">
               <p><b>People Required:</b> {job.peopleRequired}</p>
               <p><b>People Hired:</b> {job.peopleHired}</p>
             </div>
