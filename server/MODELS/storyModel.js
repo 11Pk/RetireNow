@@ -15,7 +15,7 @@ const storySchema = new mongoose.Schema(
 
     description: {
       type: String,
-      required: true, // FIXED
+      required: true, 
     },
 
     photo: {
@@ -24,7 +24,7 @@ const storySchema = new mongoose.Schema(
 
     date: {
       type: Date,
-      required: true, // FIXED
+      required: true, 
     },
   },
   { timestamps: true }

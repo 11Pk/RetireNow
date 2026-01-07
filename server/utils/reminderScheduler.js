@@ -1,12 +1,10 @@
 import cron from "node-cron";
 import { Reminder } from "../MODELS/healthModel.js";
 import { sendEmail } from "./sendEmail.js";
-import User from "../models/User.js";
 
 
-
-// Run every day at 9 AM
-cron.schedule("0 9 * * *", async () => {
+// Run every day at 8 AM
+cron.schedule("0 8 * * *", async () => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
