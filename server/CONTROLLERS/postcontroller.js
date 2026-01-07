@@ -5,6 +5,7 @@ export const currentposts= async(req,res)=>{
     try{
        const posts = await fetchPosts(req.query.interest);
     res.status(200).json(posts);
+
     }
     catch(error){
        console.log("Error fetching posts from the current category");
@@ -15,7 +16,8 @@ export const currentposts= async(req,res)=>{
 
 export const newpost=async(req,res)=>{
     try{
-            const { userId, content, interest, images } = req.body; 
+        const userId=req.user.id;
+            const { content, interest, images } = req.body; 
                const newPost = await savePosts(userId, content, interest, images || []);
 
     res.status(201).json({

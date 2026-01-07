@@ -153,6 +153,7 @@ const Signup = () => {
     confirmPassword: "",
     age: "",
     phone: "",
+   
   });
 
   const handleSubmit = async () => {
