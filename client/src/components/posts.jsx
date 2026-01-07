@@ -118,7 +118,7 @@ useEffect(() => {
         
         <div className="flex items-center gap-4">
           <Bell className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
-          <div className="w-10 h-10 rounded-full bg-blue-500 cursor-pointer flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-[#061E29] cursor-pointer flex items-center justify-center">
             <User className="w-6 h-6 text-white" />
           </div>
         </div>
@@ -205,7 +205,7 @@ useEffect(() => {
                   </button>
                   <button  
   onClick={handleCreatePost}   // Add this
-  className="p-2 bg-blue-500 text-white rounded-lg"
+  className="p-2 bg-[#061E29] text-white rounded-lg"
 >
   Post
 </button>

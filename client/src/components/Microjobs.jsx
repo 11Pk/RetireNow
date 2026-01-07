@@ -207,14 +207,20 @@ useEffect(() => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-[#F3F4F4]">
 
       <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center gap-3">
-          <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-br 
+            from-[#061E29] 
+            via-[#1D546D]
+            to-[#5F9598] rounded-full flex items-center justify-center">
             <Heart className="text-white" />
           </div>
-          <span className="text-2xl font-bold text-purple-600">
+          <span className="text-2xl font-bold bg-gradient-to-br 
+            from-[#061E29] 
+            via-[#1D546D] 
+            to-[#5F9598] bg-clip-text">
             RetireWell
           </span>
         </div>
@@ -260,7 +266,7 @@ useEffect(() => {
                   onClick={() => toggleSave(job._id)}
                   className={`p-2 rounded-full ${
                     savedJobs.includes(job._id)
-                      ? "bg-purple-100 text-purple-600"
+                      ? "bg-purple-100 text-[#1D546D]"
                       : "bg-gray-100 text-gray-400"
                   }`}
                 >
@@ -290,7 +296,7 @@ useEffect(() => {
   className={`w-full py-3 rounded-xl font-semibold ${
     appliedJobs.includes(job._id)
       ? "bg-gray-400 cursor-not-allowed"
-      : "bg-purple-600 text-white"
+      : "bg-[#061E29] text-white"
   }`}
 >
   {appliedJobs.includes(job._id) ? "Applied" : "Apply Now"}
