@@ -5,11 +5,22 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md p-4 flex justify-between items-center">
       {/* Logo / Brand */}
-      <h1 className="text-2xl font-bold text-amber-700">
-        RetireWell
-      </h1>
+      <h1
+  className="
+    text-2xl font-bold
+    bg-gradient-to-br
+    from-[#061E29]
+    via-[#1D546D]
+    to-[#5F9598]
+    bg-clip-text
+    text-transparent
+  "
+>
+  RetireWell
+</h1>
 
-      {/* Navigation Links */}
+
+      {/* Navigation Links
       <div className="space-x-6">
         <Link
           to="/"
@@ -38,7 +49,7 @@ const Navbar = () => {
         >
           Health
         </Link>
-      </div>
+      </div> */}
     </nav>
   );
 };

@@ -505,18 +505,22 @@ const [loadingShare, setLoadingShare] = useState(false);
 };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100">
+  <div className="min-h-screen bg-[#87CEEB]
+">
+
       <Navbar />
 
       <div className="max-w-5xl mx-auto py-10 px-6">
-        <h2 className="text-3xl font-bold text-center text-emerald-800 mb-8">
-          💚 My Health Tracker
+        <h2 className="text-3xl font-bold text-center text-[#0c1113] mb-8
+">
+          My Health Tracker
         </h2>
 
         {/* Health Data Input */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-10">
           <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <HeartPulse size={20} className="text-emerald-600" /> Daily Health
+          My Health Tracker
+            <HeartPulse size={20} className="" /> Daily Health
             Info
           </h3>
 
@@ -557,7 +561,7 @@ const [loadingShare, setLoadingShare] = useState(false);
 
           <button
             onClick={addRecord}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg mt-4"
+            className="bg-[#042734] hover:bg-[#214e60] text-white font-semibold py-2 px-4 rounded-lg mt-4"
           >
             Save Record
           </button>
@@ -566,7 +570,7 @@ const [loadingShare, setLoadingShare] = useState(false);
         {/* CHART */}
         {records.length > 0 && (
           <div className="bg-white rounded-2xl shadow-lg p-6 mb-10">
-            <h3 className="text-xl font-semibold mb-4 text-emerald-700">
+            <h3 className="text-xl font-semibold mb-4 ttext-[#0c1113]">
               📈 Weekly Health Summary
             </h3>
 
@@ -591,7 +595,7 @@ const [loadingShare, setLoadingShare] = useState(false);
               </LineChart>
             </ResponsiveContainer>
 
-            <button onClick={() => setShowShareModal(true)} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg mt-4 flex items-center gap-2">
+            <button onClick={() => setShowShareModal(true)} className="bg-[#042734] hover:bg-[#214e60] text-white font-semibold py-2 px-4 rounded-lg mt-4 flex items-center gap-2">
               <Share2 size={18} /> Share with Doctor
             </button>
           </div>
@@ -600,7 +604,7 @@ const [loadingShare, setLoadingShare] = useState(false);
         {/* Reminders */}
         <div className="bg-white rounded-2xl shadow-lg p-6">
           <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <BellRing size={20} className="text-amber-600" /> Medication &
+            <BellRing size={20} className="text-[#0c1113]" /> Medication &
             Appointments
           </h3>
 
@@ -629,7 +633,7 @@ const [loadingShare, setLoadingShare] = useState(false);
 
             <button
               onClick={addReminder}
-              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2"
+              className="bg-[#042734] hover:bg-[#214e60] text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2"
             >
               <PlusCircle size={18} /> Add
             </button>
@@ -658,7 +662,7 @@ const [loadingShare, setLoadingShare] = useState(false);
       {showShareModal && (
   <div className="fixed inset-0 flex items-center justify-center z-50">
     <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200">
-      <h3 className="text-xl font-semibold mb-4 text-emerald-700 text-center">
+      <h3 className="text-xl font-semibold mb-4 text-[#0c1113] text-center">
         📤 Share Health Report
       </h3>
 
@@ -667,7 +671,7 @@ const [loadingShare, setLoadingShare] = useState(false);
         placeholder="Doctor's Email"
         value={doctorEmail}
         onChange={(e) => setDoctorEmail(e.target.value)}
-        className="border border-gray-300 p-3 rounded-lg w-full mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+        className="border border-gray-300 p-3 rounded-lg w-full mb-4 focus:outline-none focus:ring-2 focus:ring-[#042734]"
       />
 
       <div className="flex justify-end gap-3">
@@ -681,7 +685,7 @@ const [loadingShare, setLoadingShare] = useState(false);
         <button
           onClick={shareWithDoctor}
           disabled={loadingShare}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium disabled:opacity-60"
+          className="bg-[#042734] hover:bg-[#214e60] text-white px-5 py-2 rounded-lg font-medium disabled:opacity-60"
         >
           {loadingShare ? "Sharing..." : "Share"}
         </button>

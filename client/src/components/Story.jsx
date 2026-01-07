@@ -428,20 +428,28 @@ const Story = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100">
+    <div className="min-h-screen bg-[#87CEEB]">
       <Navbar />
 
       <div className="max-w-5xl mx-auto py-10 px-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-amber-800">🕰️ My Life Story</h2>
+          <h2 className="text-3xl font-bold text-[#0c1113]"> My Life Story</h2>
 
           <button
-            onClick={generateLifeBook}
-            disabled={loadingLifeBook}
-            className="bg-purple-600 text-white px-6 py-2 rounded-full disabled:opacity-50"
-          >
-            📘 Generate LifeBook
-          </button>
+  onClick={generateLifeBook}
+  disabled={loadingLifeBook}
+  className="
+    px-6 py-2 rounded-full
+    text-[#EAE0CF]
+    bg-[#061E29]
+    hover:bg-[#1D546D]
+    disabled:opacity-50
+    transition-colors
+  "
+>
+  Generate LifeBook
+</button>
+
         </div>
 
         {/* ================= ADD MEMORY ================= */}
@@ -474,11 +482,18 @@ const Story = () => {
           <input type="file" name="photo" onChange={handleChange} />
 
           <button
-            onClick={handleSubmit}
-            className="mt-3 bg-amber-600 text-white px-4 py-2 rounded"
-          >
-            {editIndex !== null ? "Update" : "Add"} Memory
-          </button>
+  onClick={handleSubmit}
+  className="
+    mt-3
+    px-4 py-2 rounded
+    text-[#EAE0CF]
+    bg-[#042734] hover:bg-[#214e60]
+    transition-colors
+  "
+>
+  {editIndex !== null ? "Update" : "Add"} Memory
+</button>
+
         </div>
 
         {/* ================= MEMORIES ================= */}
@@ -496,7 +511,7 @@ const Story = () => {
                 />
                 <Trash2
                   onClick={() => handleDelete(m._id)}
-                  className="cursor-pointer text-red-500"
+                  className="cursor-pointer text-[#0c1113]"
                 />
               </div>
             </div>
@@ -518,14 +533,14 @@ const Story = () => {
 
         {/* ================= LIFEBOOK DISPLAY ================= */}
         {lifeBook && (
-          <div className="mt-12 bg-white p-8 rounded-2xl shadow-xl border-t-4 border-purple-600">
-            <h2 className="text-3xl font-bold text-center text-purple-700 mb-6">
+          <div className="mt-12 bg-white p-8 rounded-2xl shadow-xl border-t-4 border-[#0c1113]">
+            <h2 className="text-3xl font-bold text-center text-[#0c1113] mb-6">
               📖 My LifeBook
             </h2>
 
             {lifeBook.chapters.map((c, i) => (
               <div key={i} className="mb-6">
-                <h3 className="text-xl font-semibold text-amber-800">
+                <h3 className="text-xl font-semibold text-[#0c1113]">
                   {c.title}
                 </h3>
                 <p className="text-gray-700 whitespace-pre-line">
