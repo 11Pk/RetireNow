@@ -1,8 +1,8 @@
 
-async function nearbyUsers()
+async function nearbyUsers(currentUserLocation)
 {
 const nearbyUsers = await User.find({
-  interests: { $in: currentUser.interests }, // match interest
+ 
   location: {
     $near: {
       $geometry: currentUserLocation, // user's location

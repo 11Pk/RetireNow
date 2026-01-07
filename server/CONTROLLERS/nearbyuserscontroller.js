@@ -1,9 +1,19 @@
-import nearbyUsers from "../services/nearbyusers";
-
-async function nearbyUsers(req,res)
+import nearbyUsers from "../services/nearbyusers.js";
+import storeuserlocation from "../services/userlocation.js";
+import User from "../MODELS/User.js";
+export const nearbyusers=(req,res)=>
 {
-users=nearbyUsers();
+const userid=req.user.id;
+const location=User.findById(userid).location;
+const users=nearbyUsers(location);
 res.json(users);
 }
 
-export default nearbyUsers;
+export const storelocation=(req,res)=>{
+    const userid=req.user.id;
+       const { latitude, longitude } = req.body;
+   storeuserlocation(userid,latitude,longitude);
+   
+}
+
+// export default nearbyUsers;

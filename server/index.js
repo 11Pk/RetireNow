@@ -12,6 +12,7 @@ import storyRoutes from "./ROUTES/storyRoutes.js";
 import healthRoutes from './ROUTES/healthRoutes.js'
 import authRoutes from "./ROUTES/authRoutes.js";
 import postRoute from "./ROUTES/postRoutes.js"
+import nearbyusersroutes from "./routes/nearbyusersroutes.js";
 //  Utilities
 import "./utils/reminderScheduler.js";
 
@@ -35,6 +36,7 @@ app.use("/api/story", storyRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/community",postRoute)
+app.use("/api/nearby",nearbyusersroutes);
 
 // Port
 const PORT =5000;
