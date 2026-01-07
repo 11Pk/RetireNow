@@ -3,13 +3,66 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 function Posts() {
   const [postText, setPostText] = useState("");
+  const [nearbyUsers, setNearbyUsers] = useState([]);
+const token = localStorage.getItem("token");
+
+useEffect(() => {
+  if (!token) return;
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+  try {
+    const res = await fetch("http://localhost:5000/api/nearby/storelocation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+      }),
+    });
+
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error("Location update failed:", err);
+  }
+});
+  
+}, [token]);
+
+
+
+// const fetchnearbyusers=async()=>{
+//   try{
+//     const response= await fetch("http://localhost:5000/api/nearby/nearby",{
+//       method:"GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//          Authorization: `Bearer ${token}`,
+//       },
+//     })
+//      const data = await response.json();
+//      setNearbyUsers(data);
+//   }
+//   catch(error)
+//   {
+//     console.error(error);
+//     console.log("there was an error fetching user nearby you.");
+//   }
+// }
+// useEffect(()=>{
+//   fetchnearbyusers();
+// },[]);
+
 
 const handleCreatePost = async () => {
   try {
     const response = await fetch("http://localhost:5000/api/community/new", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         userId: "67452fb4c4a35e82b9f270ea",   // Replace with actual user ID
@@ -216,92 +269,7 @@ useEffect(() => {
   ))
 )}
 
-              {/* Posts */}
-              
-                {/* Ramesh's Post */}
-                {/* <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-full bg-blue-200 flex items-center justify-center  ">
-                      <span className="text-blue-700 font-semibold">R</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <div>
-                          <h3 className="font-bold text-gray-900">Ramesh</h3>
-                          <p className="text-sm text-gray-500">2h ago</p>
-                        </div>
-                        <span className="text-sm text-gray-500">2h ago</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-gray-800 mb-3 ml-14">My rose plant finally bloomed today!</p>
-                  <div className="flex items-center gap-4 ml-14">
-                    <button className="flex items-center gap-2 text-gray-600 hover:text-red-500">
-                      <Heart className="w-5 h-5" />
-                      <span className="text-sm">12</span>
-                    </button>
-                    <button className="flex items-center gap-2 text-gray-600 hover:text-blue-500">
-                      <MessageCircle className="w-5 h-5" />
-                      <span className="text-sm">3</span>
-                    </button>
-                  </div>
-                </div> */}
-
-                {/* Sunita's Post */}
-                {/* <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-full bg-red-200 flex items-center justify-center flex-shrink-0">
-                      <span className="text-red-700 font-semibold">S</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <div>
-                          <h3 className="font-bold text-gray-900">Sunita</h3>
-                          <p className="text-sm text-gray-500">1 day ago</p>
-                        </div>
-                        <span className="text-sm text-gray-500">1d ago</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mb-3 ml-14">
-                    <div className="relative rounded-lg overflow-hidden bg-gray-200 aspect-video mb-2">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center">
-                          <span className="text-2xl">▶</span>
-                        </div>
-                      </div>
-                    </div>
-                    <p className="text-sm text-gray-700 font-medium">Composting_tips.mp4</p>
-                  </div>
-                  <div className="flex items-center gap-4 ml-14">
-                    <button className="flex items-center gap-2 text-gray-600 hover:text-red-500">
-                      <Heart className="w-5 h-5" />
-                      <span className="text-sm">8</span>
-                    </button>
-                    <button className="flex items-center gap-2 text-gray-600 hover:text-blue-500">
-                      <MessageCircle className="w-5 h-5" />
-                      <span className="text-sm">5</span>
-                    </button>
-                  </div>
-                </div> */}
-
-                {/* Marst's Post */}
-                {/* <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-full bg-purple-200 flex items-center justify-center flex-shrink-0">
-                      <span className="text-purple-700 font-semibold">M</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <div>
-                          <h3 className="font-bold text-gray-900">Marst</h3>
-                          <p className="text-sm text-gray-500">3 days ago</p>
-                        </div>
-                        <span className="text-sm text-gray-500">3d ago</span>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+            
               
             </div>
           </div>
@@ -309,45 +277,53 @@ useEffect(() => {
           {/* Right Column */}
           <div className="lg:col-span-3 space-y-6">
             {/* People Near You */}
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">People Near You</h2>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 rounded-full bg-green-200 flex items-center justify-center">
-                    <span className="text-green-700 font-semibold">N</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-gray-900">Neelam</h3>
-                    <p className="text-sm text-gray-500 mb-2">2 km away</p>
-                    <div className="flex gap-2">
-                      <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                        Connect
-                      </button>
-                      <button className="px-3 py-1 text-sm border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
-                        Message
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 rounded-full bg-purple-200 flex items-center justify-center flex-shrink-0">
-                    <span className="text-purple-700 font-semibold">M</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-gray-900">Mohan</h3>
-                    <p className="text-sm text-gray-500 mb-2">3 km away</p>
-                    <div className="flex gap-2">
-                      <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                        Connect
-                      </button>
-                      <button className="px-3 py-1 text-sm border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
-                        Join
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           <div className="bg-white rounded-xl p-6 shadow-sm">
+  <h2 className="text-lg font-bold text-gray-900 mb-4">
+    People Near You
+  </h2>
+
+  <div className="space-y-4">
+    {nearbyUsers.map((user) => (
+      <div
+        key={user.id}
+        className="flex items-start gap-3"
+      >
+        {/* Avatar */}
+        {/* <div
+          className={`w-12 h-12 rounded-full flex items-center justify-center ${user.bgColor}`}
+        >
+          <span
+            className={`font-semibold ${user.textColor}`}
+          >
+            {user.initial}
+          </span>
+        </div> */}
+
+        {/* Info */}
+        <div className="flex-1">
+          <h3 className="font-bold text-gray-900">
+            {user.name}
+          </h3>
+          <p className="text-sm text-gray-500 mb-2">
+            {user.distance}
+          </p>
+
+          {/* Actions */}
+          <div className="flex gap-2">
+            <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+              Connect
+            </button>
+
+            {/* <button className="px-3 py-1 text-sm border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+              {user.secondaryAction}
+            </button> */}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
 
             {/* Upcoming Events */}
             <div className="bg-white rounded-xl p-6 shadow-sm">

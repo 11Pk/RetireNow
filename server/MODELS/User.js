@@ -37,8 +37,26 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // location:{
+    //  type: { type: String, enum: ["Point"], default: "Point" },
+    // coordinates: [longitude, latitude],
+    
+    // }
+     location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number], // longitude, latitude
+        required: true,
+      },
+    },
   },
   { timestamps: true }
 );
-
-export default mongoose.model("User", userSchema);
+userSchema.index({ location: "2dsphere" });
+// export default mongoose.model("User", userSchema);
+export default mongoose.models.User ||
+  mongoose.model("User", userSchema);

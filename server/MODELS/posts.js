@@ -8,7 +8,7 @@ const CommentSchema = new mongoose.Schema({
 });
 
 const PostSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: `${User}`, required: true },   //User linked
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },   //User linked
   content: { type: String, required: true },
   interest: { type: String, index: true },      
   images: [String],                               
